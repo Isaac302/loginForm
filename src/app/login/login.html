@@ -1,0 +1,30 @@
+<section class="login-container flex flex-col items-center justify-center min-h-screen bg-gray-100">
+    <div class="login-box bg-white p-8 rounded-2xl shadow-md w-full max-w-md text-center">
+        
+        <h2 class="text-blue-500 text-4xl font-bold mb-8">Iniciar Sesión</h2>
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <div class="flex flex-col text-left gap-6">
+        
+         <!-- userTag -->   
+        <input class=" text-black-500/50 border-b-2 pb-2" placeholder="Ingresa tu nombre" id="username" formControlName="username" />
+        
+        <!-- passwordTag -->
+        <input class=" text-black-500/50 border-b-2 pb-2" id="password"
+         [type]="showPassword ? 'text' : 'password'" 
+         formControlName="password" placeholder="Ingresa tu contraseña"/>
+        <label>
+            <input type="checkbox" (change)="togglePassword()">
+            Mostrar contraseña
+        </label>
+
+        </div>
+        <button class="bg-blue-500 py-2 px-10 rounded-2xl my-4 hover:bg-blue-800 text-white cursor-pointer" type="submit" [disabled]="!loginForm.valid">Ingresar</button>
+        </form>
+
+        <div class="flex gap-2">
+            <p>¿No tienes una cuenta?</p>
+            <a routerLink="/register" class="text-blue-500 hover:underline cursor-pointer">Regístrate</a>
+        </div>
+        
+    </div>
+</section>

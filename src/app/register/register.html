@@ -1,0 +1,121 @@
+<section class="flex flex-col items-center justify-center min-h-screen bg-gray-100">
+  <div class="bg-white p-8 rounded-2xl shadow-md w-full max-w-lg">
+    
+    <h2 class="text-blue-500 text-3xl font-bold text-center mb-6">
+      Registro – Paso {{ step }} de 3
+    </h2>
+
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+
+      <!-- ======================================== -->
+      <!-- PASO 1: Usuario y contraseña -->
+      <!-- ======================================== -->
+      @if (step === 1) {
+        <div class="flex flex-col gap-6">
+
+          <input 
+            class="border-b-2 pb-2" 
+            placeholder="Nombre de usuario"
+            formControlName="username" />
+
+          <input 
+            class="border-b-2 pb-2"
+            placeholder="Contraseña" 
+            [type]="showPassword ? 'text' : 'password'"
+            formControlName="password" />
+
+          <input 
+            class="border-b-2 pb-2"
+            placeholder="Repetir contraseña" 
+            [type]="showPassword ? 'text' : 'password'"
+            formControlName="repeatPassword" />
+
+          <label class="flex items-center gap-2">
+            <input type="checkbox" (change)="togglePassword()">
+            Mostrar contraseñas
+          </label>
+
+          <button 
+            class="bg-blue-500 text-white py-2 rounded-xl hover:bg-blue-700"
+            type="button"
+            (click)="nextStep()"
+            [disabled]="!isStep1Valid()">
+            Siguiente
+          </button>
+        </div>
+      }
+
+
+      <!-- ======================================== -->
+      <!-- PASO 2: Datos personales -->
+      <!-- ======================================== -->
+      @if (step === 2) {
+        <div class="flex flex-col gap-6">
+
+          <input 
+            class="border-b-2 pb-2"
+            type="date"
+            formControlName="birthdate" />
+
+          <select 
+            class="border-b-2 pb-2"
+            formControlName="gender">
+            <option value="" disabled>Selecciona tu género</option>
+            <option value="Masculino">Masculino</option>
+            <option value="Femenino">Femenino</option>
+            <option value="Otro">Otro</option>
+          </select>
+
+          <div class="flex justify-between">
+            <button 
+              type="button"
+              class="bg-gray-300 px-5 py-2 rounded-xl hover:bg-gray-400"
+              (click)="prevStep()">
+              Atrás
+            </button>
+
+            <button 
+              type="button"
+              class="bg-blue-500 text-white px-5 py-2 rounded-xl hover:bg-blue-700"
+              (click)="nextStep()"
+              [disabled]="!isStep2Valid()">
+              Siguiente
+            </button>
+          </div>
+        </div>
+      }
+
+
+      <!-- ======================================== -->
+      <!-- PASO 3: Información de contacto -->
+      <!-- ======================================== -->
+      @if (step === 3) {
+        <div class="flex flex-col gap-6">
+
+          <input class="border-b-2 pb-2" placeholder="Nombre" formControlName="firstname" />
+          <input class="border-b-2 pb-2" placeholder="Apellido" formControlName="lastname" />
+          <input class="border-b-2 pb-2" placeholder="Ubicación" formControlName="location" />
+          <input class="border-b-2 pb-2" placeholder="Número telefónico" formControlName="phone" />
+          <input class="border-b-2 pb-2" placeholder="Correo electrónico" formControlName="email" />
+
+          <div class="flex justify-between">
+            <button 
+              type="button"
+              class="bg-gray-300 px-5 py-2 rounded-xl hover:bg-gray-400"
+              (click)="prevStep()">
+              Atrás
+            </button>
+
+            <button 
+              type="submit"
+              class="bg-green-500 text-white px-5 py-2 rounded-xl hover:bg-green-700"
+              [disabled]="!registerForm.valid">
+              Registrar
+            </button>
+          </div>
+        </div>
+      }
+
+    </form>
+  </div>
+</section>
